@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkjouincashflow_website=self.webpackChunkjouincashflow_website||[]).push([[388],{388:e=>{e.exports=function(){throw new Error("ws does not work in the browser. Browser clients must use the native WebSocket object")}}}]);
+//# sourceMappingURL=388.47a0e694.chunk.js.map
