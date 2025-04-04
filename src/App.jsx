@@ -95,10 +95,11 @@ function App() {
 export default App;*/
 
 //version 2 - formulaire modification bdd
-import React, { useEffect, useState } from "react";
+/*import React, { useEffect, useState } from "react";
 import supabase from "./services/supabaseAPI";
 import Products from "./components/Products";
 import AddProductForm from "./components/AddProductForm";
+
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -128,4 +129,42 @@ function App() {
   );
 }
 
+export default App;*/
+
+//version 3 - rajouter products en props
+import React, { useEffect, useState } from "react";
+import supabase from "./services/supabaseAPI";
+import Products from "./components/Products";
+import AddProductForm from "./components/AddProductForm";
+
+
+function App() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchProducts = async () => {
+    const { data, error } = await supabase.from("Products").select("*");
+
+    if (error) {
+      console.error("Erreur de récupération :", error.message);
+    } else {
+      setProducts(data);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  return (
+    <div>
+      <h1>Gestion des Produits</h1>
+      <AddProductForm onProductAdded={fetchProducts} />
+      {loading ? <p>Chargement...</p> : <Products products={products} fetchProducts={fetchProducts} />} 
+    </div>
+  );
+}
+
 export default App;
+//ligne modifiée 164
